@@ -10,11 +10,9 @@ public class Main {
 
     public static void main(String[] args) {
 	// write your code here
-
-        System.out.println("Enter file-path");
-        Scanner in = new Scanner(System.in);
-        System.out.println();
-        String path = in.nextLine();
+        if(args.length == 0)
+            return;
+        String path = args[0];
 
         GetCardsFromTxt getCards = new GetCardsFromTxt();
         List<Employee> employees = getCards.read(path);

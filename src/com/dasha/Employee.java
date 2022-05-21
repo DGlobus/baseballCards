@@ -3,6 +3,7 @@ package com.dasha;
 import java.util.List;
 import java.io.PrintStream;
 import java.io.UnsupportedEncodingException;
+import java.util.stream.Collectors;
 
 public class Employee{
     String firstName;
@@ -52,21 +53,14 @@ public class Employee{
         return post;
     }
 
-    public void print(){
-        try{
-        PrintStream ps = new PrintStream(System.out, true, "UTF-8");
-
-        ps.println("First Name: " + firstName);
-        ps.println("Last Name: " + lastName);
-        ps.println("Description: " + description);
-        characteristics.stream().forEach(p -> ps.print(p + " "));
-        ps.println();
-        ps.println("Post: " + post.name);
-        ps.println();
-        }
-        catch (Exception ex){
-            ex.printStackTrace();
-        }
-        
+    @Override
+    public String toString() {
+        String b = "";
+        return "First Name: " + firstName
+                + "\nLast Name: " + lastName
+                + "\nDescription: " + description
+                + "\n" + characteristics.stream().map(a->String.valueOf(a)).collect(Collectors.joining(", "))
+                + "\nPost: " + post.name + "\n\n";
     }
+
 }
