@@ -11,7 +11,7 @@ public class Main {
     public static void main(String[] args) {
 	// write your code here
         if(args.length == 0)
-            return;
+            throw new IllegalArgumentException("I can't find this file");
         String path = args[0];
 
         GetCardsFromTxt getCards = new GetCardsFromTxt();

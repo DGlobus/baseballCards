@@ -23,20 +23,10 @@ public class PrintToConsole implements PrintCards{
 
     @Override
     public void sort() {
-        Comparator<Employee> comparator = new Comparator<Employee>() {
-            @Override
-            public int compare(Employee emp1, Employee emp2) {
-                if(emp1.getLastName().equals(emp2.getLastName())){
-                    return emp1.getFirstName().compareTo(emp2.getFirstName());
-                }
-                else{
-                    return emp1.getLastName().compareTo(emp2.getLastName());
-                }
-            }
-        };
+        Comparator<Employee> employeeComparator = Comparator.comparing(Employee::getLastName).thenComparing(Employee::getFirstName);
 
         employees = employees.stream()
-                .sorted((emp1, emp2)->  comparator.compare(emp1, emp2))
+                .sorted((emp1, emp2)->  employeeComparator.compare(emp1, emp2))
                 .collect(Collectors.toList());
     }
 

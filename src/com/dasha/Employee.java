@@ -55,7 +55,6 @@ public class Employee{
 
     @Override
     public String toString() {
-        String b = "";
         return "First Name: " + firstName
                 + "\nLast Name: " + lastName
                 + "\nDescription: " + description
