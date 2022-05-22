@@ -11,7 +11,7 @@ public class Main {
     public static void main(String[] args) {
 	// write your code here
         if(args.length == 0)
-            throw new IllegalArgumentException("I can't find this file");
+            throw new IllegalArgumentException("There is no imparted parameters");
         String path = args[0];
 
         GetCardsFromTxt getCards = new GetCardsFromTxt();
