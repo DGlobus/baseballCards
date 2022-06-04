@@ -1,0 +1,33 @@
+[
+{
+"firstName": "Геннадий",
+"lastName": "Кузьмин",
+"description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras sit amet dictum felis, eu fringilla eros. Sed et gravida neque. Nullam at egestas erat. Mauris vitae convallis nulla. Aenean condimentum lectus magna. Suspendisse viverra quam non ante pellentesque, a euismod nunc dapibus. Duis sed congue erat",
+"characteristics": [ "honest", "introvert", "like criticism", "love of Learning", "pragmatism"],
+"postId": "854ef89d-6c27-4635-926d-894d76a81707"
+},
+
+{
+"firstName": "Дарья",
+"lastName": "Глобчастая",
+"description": "Big Harry Potter Fan",
+"characteristics": ["introvert"],
+"postId": "a3dec21f-1187-4b05-896b-96b580b453a5"
+}, 
+
+{
+"firstName": "Иван",
+"lastName": "Петров",
+"description": "бла бла",
+"characteristics": ["бла", "бла бла бла"],
+"postId": "a3dec21f-1187-4b05-896b-96b580b453a5"
+},
+
+{
+"firstName": "Петя",
+"lastName": "Иванов",
+"description": "алаллала",
+"characteristics": ["ла", "дада"],
+"postId": "854ef89d-6c07-4665-936d-894d76a81707"
+}
+]
