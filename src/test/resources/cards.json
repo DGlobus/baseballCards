@@ -13,21 +13,5 @@
 "description": "Big Harry Potter Fan",
 "characteristics": ["introvert"],
 "postId": "a3dec21f-1187-4b05-896b-96b580b453a5"
-}, 
-
-{
-"firstName": "Иван",
-"lastName": "Петров",
-"description": "бла бла",
-"characteristics": ["бла", "бла бла бла"],
-"postId": "a3dec21f-1187-4b05-896b-96b580b453a5"
-},
-
-{
-"firstName": "Петя",
-"lastName": "Иванов",
-"description": "алаллала",
-"characteristics": ["ла", "дада"],
-"postId": "854ef89d-6c07-4665-936d-894d76a81707"
 }
 ]
