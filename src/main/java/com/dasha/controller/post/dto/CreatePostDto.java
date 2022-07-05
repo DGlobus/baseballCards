@@ -8,6 +8,7 @@ import javax.validation.constraints.NotBlank;
 
 @Data
 @NoArgsConstructor
+@AllArgsConstructor
 public class CreatePostDto {
     @NotBlank
     String name;

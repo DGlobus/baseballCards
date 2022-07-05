@@ -8,7 +8,6 @@ import java.util.*;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
-@Service
 public class EmployeeListService {
 
     public List<Employee> filter(List<Employee> employees, SearchEmployeeParams search) {

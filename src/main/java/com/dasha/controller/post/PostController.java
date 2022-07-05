@@ -3,10 +3,10 @@ package com.dasha.controller.post;
 import com.dasha.controller.post.dto.CreatePostDto;
 import com.dasha.controller.post.dto.PostDto;
 import com.dasha.controller.post.mapper.PostMapper;
+import com.dasha.exceptions.exception.ItemNotFoundException;
 import com.dasha.model.Post;
 import com.dasha.service.post.CreatePostParams;
 import com.dasha.service.post.PostService;
-import io.swagger.annotations.ApiOperation;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -29,15 +29,15 @@ public class PostController {
         Post newPost = postService.create(CreatePostParams.builder()
                                                             .name(params.getName())
                                                             .build());
-        return mapper.toDTO(newPost);
+        return mapper.toDto(newPost);
     }
 
     @PostMapping("/update/{id}")
-    public PostDto update(@PathVariable UUID id, @RequestBody CreatePostDto params) {
+    public PostDto update(@PathVariable UUID id, @RequestBody CreatePostDto params) throws ItemNotFoundException {
         Post updatedPost = postService.update(id, CreatePostParams.builder()
                                                                     .name(params.getName())
                                                                     .build());
-        return mapper.toDTO(updatedPost);
+        return mapper.toDto(updatedPost);
     }
 
     @PostMapping("/delete/{id}")
@@ -46,12 +46,12 @@ public class PostController {
     }
 
     @PostMapping("/getById/{id}")
-    public PostDto getById(@PathVariable UUID id) {
-        return mapper.toDTO(postService.getById(id));
+    public PostDto getById(@PathVariable UUID id) throws ItemNotFoundException {
+        return mapper.toDto(postService.getById(id));
     }
 
     @PostMapping("/getAll")
     public List<PostDto> getAll() {
-        return postService.getAll().stream().map(mapper::toDTO).collect(Collectors.toList());
+        return postService.getAll().stream().map(mapper::toDto).collect(Collectors.toList());
     }
 }

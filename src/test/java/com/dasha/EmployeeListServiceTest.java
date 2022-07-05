@@ -12,10 +12,11 @@ import java.util.UUID;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 
-public class EmployeeServiceTest {
+public class EmployeeListServiceTest {
 
     private final PostService map = new PostService();
     private final EmployeeListService employeeService = new EmployeeListService();
+
     private final Employee Gennadiy = Employee.builder()
                 .firstName("Геннадий")
                 .lastName("Кузьмин")

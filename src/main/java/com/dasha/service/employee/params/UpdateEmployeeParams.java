@@ -1,28 +1,22 @@
 package com.dasha.service.employee.params;
 
 import com.dasha.model.Contacts;
-import com.dasha.model.JobType;
 import com.dasha.model.Post;
-import lombok.*;
+import lombok.Data;
+import lombok.NonNull;
 
-import javax.validation.constraints.NotBlank;
 import java.util.List;
+import java.util.UUID;
 
 @Data
-@Builder
-@AllArgsConstructor
-public class CreateEmployeeParams {
-    @NotBlank
+public class UpdateEmployeeParams {
+    @NonNull
+    private UUID id;
     private String firstName;
-    @NotBlank
     private String lastName;
     private String description;
-    @NonNull
     private List<String> characteristics;
-    @NonNull
-    private Post post;
-    @NonNull
+    private UUID postId;
     private Contacts contacts;
-    @NonNull
     private String jobType;
 }

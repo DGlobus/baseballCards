@@ -1,5 +1,6 @@
 package com.dasha.controller.employee.dto;
 
+import com.dasha.model.Post;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -21,7 +22,7 @@ public class CreateEmployeeDto {
     @NotNull
     private List<String> characteristics;
     @NotNull
-    private UUID postId;
+    private Post post;
     @NotNull
     private String email;
     @NotNull
