@@ -1,6 +1,5 @@
 package com.dasha.util.ioutils.parse;
 
-import com.dasha.model.Employee;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -14,10 +13,10 @@ public class ParseEmployeeJson implements ParseEmployeeFile {
     private final ObjectMapper mapper = new ObjectMapper();
 
     @Override
-    public List<EmployeeParsed> read(String path) {
+    public List<EmployeeParsed> read(File file) {
 
         try {
-            employee = mapper.readValue(new File(path), new TypeReference<List<EmployeeParsed>>() {
+            employee = mapper.readValue(file, new TypeReference<List<EmployeeParsed>>() {
             });
 
         } catch (IOException e) {

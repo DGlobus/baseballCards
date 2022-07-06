@@ -11,11 +11,9 @@ import java.util.UUID;
 
 @Data
 @NoArgsConstructor
-@ApiModel("Модель должности")
 public class PostDto {
     @NotNull
     private UUID id;
     @NotBlank
-    @ApiModelProperty
     private String name;
 }

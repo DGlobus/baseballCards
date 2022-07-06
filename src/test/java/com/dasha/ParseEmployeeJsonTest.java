@@ -4,6 +4,7 @@ import com.dasha.util.ioutils.parse.EmployeeParsed;
 import com.dasha.util.ioutils.parse.ParseEmployeeJson;
 import org.junit.jupiter.api.Test;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -35,7 +36,7 @@ public class ParseEmployeeJsonTest {
     @Test
     public void readTest(){
         //act
-        List<EmployeeParsed> employeeFromMethod = new ParseEmployeeJson().read(ParseEmployeeJsonTest.class.getClassLoader().getResource("cards.json").getPath());
+        List<EmployeeParsed> employeeFromMethod = new ParseEmployeeJson().read(new File(ParseEmployeeJsonTest.class.getClassLoader().getResource("cards.json").getFile()));
         //assert
         var parsed = employeeFromMethod.get(0);
         assertEquals(employees, employeeFromMethod);

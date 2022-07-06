@@ -15,10 +15,9 @@ public class ParseEmployeeTxt implements ParseEmployeeFile {
     private final PostService map;
 
     @Override
-    public List<EmployeeParsed> read(String path) {
+    public List<EmployeeParsed> read(File file) {
         List<EmployeeParsed> employees = new ArrayList<>();
 
-        File file = new File(path);
         try (FileReader fileReader = new FileReader(file);
         BufferedReader bufferedReader = new BufferedReader(fileReader)){
 

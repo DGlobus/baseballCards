@@ -11,5 +11,5 @@ import javax.validation.constraints.NotBlank;
 @AllArgsConstructor
 public class CreatePostDto {
     @NotBlank
-    String name;
+    private String name;
 }

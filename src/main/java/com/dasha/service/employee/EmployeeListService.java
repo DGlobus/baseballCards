@@ -2,7 +2,6 @@ package com.dasha.service.employee;
 
 import com.dasha.model.Employee;
 import com.dasha.service.employee.params.SearchEmployeeParams;
-import org.springframework.stereotype.Service;
 
 import java.util.*;
 import java.util.function.Predicate;

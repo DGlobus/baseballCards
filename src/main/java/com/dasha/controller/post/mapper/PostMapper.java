@@ -3,7 +3,6 @@ package com.dasha.controller.post.mapper;
 import com.dasha.controller.post.dto.CreatePostDto;
 import com.dasha.controller.post.dto.PostDto;
 import com.dasha.model.Post;
-import com.dasha.service.employee.params.CreateEmployeeParams;
 import com.dasha.service.post.CreatePostParams;
 import org.mapstruct.Mapper;
 
@@ -17,5 +16,5 @@ public interface PostMapper {
 
     PostDto toDto(CreatePostDto dto);
 
-    List<PostDto> toDto(List<Post> posts);
+    List<PostDto> toListDto(List<Post> posts);
 }

@@ -1,8 +1,8 @@
 package com.dasha.controller.post;
 
+import com.dasha.controller.post.mapper.PostMapper;
 import com.dasha.controller.post.dto.CreatePostDto;
 import com.dasha.controller.post.dto.PostDto;
-import com.dasha.controller.post.mapper.PostMapper;
 import com.dasha.exceptions.exception.ItemNotFoundException;
 import com.dasha.model.Post;
 import com.dasha.service.post.CreatePostParams;
@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.UUID;
-import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api/post")
@@ -52,6 +51,6 @@ public class PostController {
 
     @PostMapping("/getAll")
     public List<PostDto> getAll() {
-        return postService.getAll().stream().map(mapper::toDto).collect(Collectors.toList());
+        return mapper.toListDto(postService.getAll());
     }
 }

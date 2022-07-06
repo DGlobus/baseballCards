@@ -1,13 +1,11 @@
-package com.dasha.test.controller;
+package com.dasha.controller;
 
 import com.dasha.controller.post.dto.PostDto;
 import com.dasha.controller.post.dto.CreatePostDto;
 import com.dasha.controller.post.mapper.PostMapper;
-import com.dasha.controller.post.mapper.PostMapperImpl;
 import com.dasha.exceptions.ErrorDetails;
-import com.dasha.model.JobType;
-import com.dasha.model.Post;
 import com.dasha.service.post.PostService;
+import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,10 +25,10 @@ public class PostControllerIT {
     private WebTestClient webTestClient;
 
     @Autowired
-    private final PostService postService = new PostService();
+    private PostService postService;
 
     @Autowired
-    private final PostMapper mapper = new PostMapperImpl();
+    private PostMapper mapper;
     
     private CreatePostDto post;
 
@@ -38,6 +36,7 @@ public class PostControllerIT {
     private void setup() {
         post = new CreatePostDto("senior developer");
     }
+
 
     private PostDto createPostInService(CreatePostDto post) {
         return mapper.toDto(postService.create(mapper.toParams(post)));
@@ -179,7 +178,7 @@ public class PostControllerIT {
 
 
     private List<PostDto> getAllFromService() {
-        return mapper.toDto(postService.getAll());
+        return mapper.toListDto(postService.getAll());
     }
 
     private List<PostDto> getAllPosts() {

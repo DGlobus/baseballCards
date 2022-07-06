@@ -3,12 +3,14 @@ package com.dasha.controller.employee.dto;
 import com.dasha.model.Contacts;
 import com.dasha.model.JobType;
 import com.dasha.model.Post;
+import lombok.Builder;
 import lombok.Data;
 
 import java.util.List;
 import java.util.UUID;
 
 @Data
+@Builder
 public class EmployeeDto {
     private UUID id;
     private String firstName;
