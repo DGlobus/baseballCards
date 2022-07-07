@@ -1,32 +1,38 @@
 package com.dasha.controller.employee.dto;
 
-import com.dasha.model.Contacts;
 import com.dasha.model.JobType;
-import lombok.AllArgsConstructor;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 import lombok.Builder;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.util.List;
 import java.util.UUID;
 
 @Data
-@NoArgsConstructor
 @Builder
-@AllArgsConstructor
+@ApiModel(description = "Объект обноваления данных сотрудника")
 public class UpdateEmployeeDto {
-    @NotNull
+    @NotBlank
+    @ApiModelProperty(name = "Имя")
     private String firstName;
-    @NotNull
+    @NotBlank
+    @ApiModelProperty(name = "Фамилия")
     private String lastName;
-    private String description;
+    @ApiModelProperty(name = "Описание")
+    private String name;
     @NotNull
+    @ApiModelProperty(name = "Список характеристик")
     private List<String> characteristics;
     @NotNull
+    @ApiModelProperty(name = "Идентификатор должности")
     private UUID postId;
     @NotNull
-    private Contacts contacts;
+    @ApiModelProperty(name = "Контактные данные")
+    private ContactsDto contacts;
     @NotNull
+    @ApiModelProperty(name = "Тип занятости")
     private JobType jobType;
 }

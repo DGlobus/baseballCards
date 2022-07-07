@@ -10,11 +10,7 @@ import springfox.documentation.spring.web.plugins.Docket;
 
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
-/**
- * Конфигурация для Swagger
- *
- * @author Maxim Seredkin
- */
+
 @Configuration
 public class SwaggerConfig {
     @Bean

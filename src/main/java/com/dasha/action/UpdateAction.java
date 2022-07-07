@@ -17,14 +17,12 @@ public class UpdateAction {
 
     private final PostService postService;
     private final EmployeeService employeeService;
-    private final EmployeeMapper mapper;
 
-    public Employee update(UUID id, UpdateEmployeeDto dto){
+    public Employee update(UpdateEmployeeParams params){
 
-        UpdateEmployeeParams params = mapper.toParams(dto);
-        if(dto.getPostId() != null) params.setPost(postService.getById(dto.getPostId()));
+        params.setPost(postService.getById(params.getPost().getId()));
 
-        return employeeService.update(id, params);
+        return employeeService.update(params);
     }
 
 }

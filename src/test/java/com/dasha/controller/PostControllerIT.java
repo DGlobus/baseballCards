@@ -4,8 +4,8 @@ import com.dasha.controller.post.dto.PostDto;
 import com.dasha.controller.post.dto.CreatePostDto;
 import com.dasha.controller.post.mapper.PostMapper;
 import com.dasha.exceptions.ErrorDetails;
+import com.dasha.model.Post;
 import com.dasha.service.post.PostService;
-import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +13,7 @@ import org.springframework.boot.test.autoconfigure.web.reactive.AutoConfigureWeb
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.web.reactive.server.WebTestClient;
 
+import java.lang.reflect.Field;
 import java.util.*;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -64,6 +65,57 @@ public class PostControllerIT {
         assertThat(actual).usingRecursiveComparison().ignoringFields("id").isEqualTo(expected);
     }
 
+
+    @Test
+    void getById() {
+        //arrange
+        Post expected = new Post(UUID.fromString("a3dec21f-1187-4b05-896b-96b580b453a5"), "student");
+
+        //act
+        PostDto actual = webTestClient.post()
+                .uri("/api/post/{id}", expected.getId())
+                .exchange()
+                //assert
+                .expectStatus()
+                .isOk()
+                .expectBody(PostDto.class)
+                .returnResult()
+                .getResponseBody();
+
+        assertThat(actual).usingRecursiveComparison().isEqualTo(expected);
+    }
+
+
+    @Test
+    void getByIdIfNotExist() {
+        //arrange
+        UUID postId = UUID.randomUUID();
+        ErrorDetails errorDetails = new ErrorDetails("Данной должности не существует " + postId);
+
+        //act
+        webTestClient.post()
+                .uri("/api/post/{id}", postId)
+                .exchange()
+                //assert
+                .expectStatus()
+                .isNotFound()
+                .expectBody(ErrorDetails.class)
+                .isEqualTo(errorDetails);
+    }
+
+    @Test
+    void getAll() {
+        //arrange
+        List<Post> expected = getAllFromService();
+
+        //act
+        List<PostDto> actual = getAllPosts();
+
+        //assert
+        assertThat(expected).usingRecursiveComparison().isEqualTo(actual);
+    }
+
+
     @Test
     void update() {
         //arrange
@@ -73,7 +125,7 @@ public class PostControllerIT {
         CreatePostDto updateDto = new CreatePostDto("anotherone");
 
         PostDto actual = webTestClient.post()
-                .uri("/api/post/update/" + expected.getId())
+                .uri("/api/post/{id}/update/", expected.getId())
                 .bodyValue(updateDto)
                 .exchange()
                 //act
@@ -96,7 +148,7 @@ public class PostControllerIT {
 
         //act
         webTestClient.post()
-                .uri("/api/post/update/" + postId)
+                .uri("/api/post/{id}/update/", postId)
                 .bodyValue(updateDto)
                 .exchange()
                 //assert
@@ -107,78 +159,39 @@ public class PostControllerIT {
     }
 
     @Test
-    void getById() {
-        //arrange
-        PostDto expected = createPostInService(post);
-
-        //act
-        PostDto actual = webTestClient.post()
-                .uri("/api/post/getById/" + expected.getId())
-                .exchange()
-                //assert
-                .expectStatus()
-                .isOk()
-                .expectBody(PostDto.class)
-                .returnResult()
-                .getResponseBody();
-
-        assertEquals(actual, expected);
-    }
-
-    @Test
-    void getByIdIfNotExist() {
-        //arrange
-        UUID postId = UUID.randomUUID();
-        ErrorDetails errorDetails = new ErrorDetails("Данной должности не существует " + postId);
-
-        //act
-        webTestClient.post()
-                .uri("/api/post/getById/" + postId)
-                .exchange()
-                //assert
-                .expectStatus()
-                .isNotFound()
-                .expectBody(ErrorDetails.class)
-                .isEqualTo(errorDetails);
-    }
-
-    @Test
-    void getAll() {
-        //arrange
-        List<PostDto> expected = getAllFromService();
-
-        //act
-        List<PostDto> actual = getAllPosts();
-
-        //assert
-        assertEquals(expected, actual);
-    }
-
-    @Test
     void delete() {
         //arrange
-        List<PostDto> postDtos = getAllFromService();
+        List<Post> posts = getAllFromService();
 
         //act
         webTestClient.post()
-                .uri("/api/post/delete/" + postDtos.get(0).getId())
+                .uri("/api/post/{id}/delete/", posts.get(0).getId())
                 .exchange()
                 .expectStatus()
                 .isOk()
                 .expectBody()
                 .returnResult();
 
-        List<PostDto> actual = getAllPosts();
+        List<Post> actual = getAllFromService();
 
-        postDtos.remove(0);
+        posts.remove(0);
 
         //assert
-        assertEquals(postDtos, actual);
+        assertThat(posts).usingRecursiveComparison().isEqualTo(actual);
     }
 
 
-    private List<PostDto> getAllFromService() {
-        return mapper.toListDto(postService.getAll());
+    private List<Post> getAllFromService() {
+        List<Post> list = new ArrayList<>();
+        try{
+            Field field = postService.getClass().getDeclaredField("posts");
+            field.setAccessible(true);
+            Map<UUID, Post> map = (Map<UUID, Post>) field.get(postService);
+            list = new ArrayList<>(map.values());
+        } catch (NoSuchFieldException | IllegalAccessException e) {
+            e.printStackTrace();
+        }
+        return list;
     }
 
     private List<PostDto> getAllPosts() {

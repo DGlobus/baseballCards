@@ -7,6 +7,8 @@ import com.dasha.service.post.PostService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.util.List;
 import java.util.UUID;
 
@@ -28,6 +30,13 @@ public class PostServiceTest {
                 new Post(UUID.fromString("854ef89d-6c27-4635-926d-894d76a81707"), "middle developer")
         );
         postService = new PostService();
+        try{
+            Method method = postService.getClass().getDeclaredMethod("fill");
+            method.setAccessible(true);
+            method.invoke(postService);
+        } catch (NoSuchMethodException | IllegalAccessException | InvocationTargetException e) {
+            e.printStackTrace();
+        }
     }
 
 

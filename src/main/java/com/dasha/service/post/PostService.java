@@ -12,25 +12,10 @@ import java.util.*;
 public class PostService {
     private final Map<UUID, Post> posts = new HashMap<>();
 
-    public PostService(){
-        fill(); //for test
-    }
-
     public Post create(CreatePostParams createPostParams) {
         Post post = createPost(createPostParams);
         posts.put(post.getId(), post);
         return post;
-    }
-
-    public Post update(@NotNull UUID postId, CreatePostParams params) {
-        Post post = getById(postId);
-        post.setName(params.getName());
-        posts.replace(postId, post);
-        return post;
-    }
-
-    public void delete(@NotNull UUID postId) {
-        posts.remove(postId);
     }
 
     public Post getById(@NotNull UUID postId) {
@@ -44,6 +29,17 @@ public class PostService {
         return new ArrayList<>(posts.values());
     }
 
+    public Post update(@NotNull UUID postId, CreatePostParams params) {
+        Post post = getById(postId);
+        post.setName(params.getName());
+        posts.replace(postId, post);
+        return post;
+    }
+
+    public void delete(@NotNull UUID postId) {
+        posts.remove(postId);
+    }
+
     private Post createPost(CreatePostParams createPostParams) {
         return Post.builder()
                     .id(UUID.randomUUID())
@@ -53,6 +49,7 @@ public class PostService {
 
     @PostConstruct
     private void fill(){
+
         posts.put(UUID.fromString("a3dec21f-1187-4b05-896b-96b580b453a5"), new Post(UUID.fromString("a3dec21f-1187-4b05-896b-96b580b453a5"), "student"));
         posts.put(UUID.fromString("854ef89d-6c27-4635-926d-894d76a81707"), new Post(UUID.fromString("854ef89d-6c27-4635-926d-894d76a81707"), "middle developer"));
         posts.put(UUID.fromString("399878e4-84fc-452b-968f-4209ae4c19a8"), new Post(UUID.fromString("399878e4-84fc-452b-968f-4209ae4c19a8"), "random person"));

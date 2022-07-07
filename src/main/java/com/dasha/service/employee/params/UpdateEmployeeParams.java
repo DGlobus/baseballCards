@@ -7,12 +7,13 @@ import lombok.*;
 
 import javax.validation.constraints.NotNull;
 import java.util.List;
+import java.util.UUID;
 
 @Data
 @Builder
-@NoArgsConstructor
-@AllArgsConstructor
 public class UpdateEmployeeParams {
+    @NotNull
+    private UUID id;
     @NotNull
     private String firstName;
     @NotNull

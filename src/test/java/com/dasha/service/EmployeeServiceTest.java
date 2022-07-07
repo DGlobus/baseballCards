@@ -1,5 +1,6 @@
 package com.dasha.service;
 
+import com.dasha.controller.employee.dto.ContactsDto;
 import com.dasha.exceptions.exception.ItemNotFoundException;
 import com.dasha.model.Contacts;
 import com.dasha.model.Employee;
@@ -27,6 +28,18 @@ public class EmployeeServiceTest {
     Post post = new Post(UUID.fromString("854ef89d-6c27-4635-926d-894d76a81707"), "middle developer");
     List<Employee> employees = List.of(
             Employee.builder()
+                    .firstName("Ivan")
+                    .lastName("Ivanov")
+                    .characteristics(List.of("lala"))
+                    .post(post)
+                    .contacts(Contacts.builder()
+                            .email("ccc@aaa.aa")
+                            .phone("111-00-00")
+                            .build())
+                    .jobType(JobType.FULL_TIME)
+                    .build(),
+
+            Employee.builder()
                     .firstName("Vasya")
                     .lastName("Vasilev")
                     .characteristics(List.of("lala"))
@@ -36,22 +49,21 @@ public class EmployeeServiceTest {
                             .phone("000-00-00")
                             .build())
                     .jobType(JobType.CONTRACT)
-                    .build(),
-
-     Employee.builder()
-            .firstName("Ivan")
-            .lastName("Ivanov")
-            .characteristics(List.of("lala"))
-            .post(post)
-            .contacts(Contacts.builder()
-                    .email("ccc@aaa.aa")
-                    .phone("111-00-00")
-                    .build())
-            .jobType(JobType.FULL_TIME)
-            .build()
+                    .build()
     );
 
     List<CreateEmployeeParams> params = List.of(
+            CreateEmployeeParams.builder()
+                    .firstName("Ivan")
+                    .lastName("Ivanov")
+                    .characteristics(List.of("lala"))
+                    .contacts(Contacts.builder()
+                            .email("ccc@aaa.aa")
+                            .phone("111-00-00")
+                            .build())
+                    .jobType(JobType.FULL_TIME)
+                    .build(),
+
             CreateEmployeeParams.builder()
                     .firstName("Vasya")
                     .lastName("Vasilev")
@@ -61,18 +73,7 @@ public class EmployeeServiceTest {
                             .phone("000-00-00")
                             .build())
                     .jobType(JobType.CONTRACT)
-                    .build(),
-
-            CreateEmployeeParams.builder()
-            .firstName("Ivan")
-            .lastName("Ivanov")
-            .characteristics(List.of("lala"))
-            .contacts(Contacts.builder()
-                    .email("ccc@aaa.aa")
-                    .phone("111-00-00")
-                    .build())
-            .jobType(JobType.FULL_TIME)
-            .build()
+                    .build()
     );
     List<UUID> ids = new ArrayList<>();
 
@@ -109,12 +110,15 @@ public class EmployeeServiceTest {
 
     @Test
     void getIdNotExist(){
+        //assert
         UUID id = UUID.randomUUID();
+        //act
         ItemNotFoundException ex = assertThrows(ItemNotFoundException.class, () -> {employeeService.getById(id);});
 
         String expected = "Данного работника не существует " + id;
         String actual = ex.getMessage();
 
+        //assert
         assertEquals(expected, actual);
     }
 
@@ -125,7 +129,7 @@ public class EmployeeServiceTest {
         createTwoEmployeesInService();
 
         //act
-        List<Employee> actual = employeeService.getAll(new SearchEmployeeParams("", null), false);
+        List<Employee> actual = employeeService.getAll(new SearchEmployeeParams("", null), true);
 
         //assert
         assertThat(actual).usingRecursiveComparison().ignoringFields("id").isEqualTo(expected);
@@ -138,24 +142,38 @@ public class EmployeeServiceTest {
         Employee expected = employees.get(0);
 
         UpdateEmployeeParams params = UpdateEmployeeParams.builder()
-                .firstName("Vasya")
-                .lastName("Petrov")
-                .characteristics(List.of("lala"))
+                .id(id)
+                .firstName("Denis")
+                .lastName("Denisov")
+                .characteristics(List.of("nana"))
                 .post(post)
                 .contacts(Contacts.builder()
-                        .email("aaa@aaa.aa")
-                        .phone("000-00-00")
+                        .phone("111-11-11")
+                        .email("bbb@bb.bb")
+                        .workEmail("work@all.day")
                         .build())
-                .jobType(JobType.CONTRACT)
+                .jobType(JobType.PART_TIME)
                 .build();
-        expected.setLastName("Petrov");
+        setExpectedNewValue(expected);
         expected.setId(id);
 
         //act
-        Employee actual = employeeService.update(id, params);
+        Employee actual = employeeService.update(params);
 
         //assert
         assertEquals(actual, expected);
+    }
+
+    private void setExpectedNewValue(Employee expected) {
+        expected.setFirstName("Denis");
+        expected.setLastName("Denisov");
+        expected.setCharacteristics(List.of("nana"));
+        expected.setPost(post);
+        expected.getContacts().setEmail("bbb@bb.bb");
+        expected.getContacts().setPhone("111-11-11");
+        expected.getContacts().setWorkEmail("work@all.day");
+        expected.setJobType(JobType.PART_TIME);
+        expected.setDescription(null);
     }
 
     @Test

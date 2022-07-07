@@ -38,8 +38,8 @@ public class EmployeeService{
         return isSorting ? sort(list) : list;
     }
 
-    public Employee update(UUID id, UpdateEmployeeParams params){
-        Employee employee = getById(id);
+    public Employee update(UpdateEmployeeParams params){
+        Employee employee = getById(params.getId());
         updateEmployee(employee, params);
         return employee;
     }
