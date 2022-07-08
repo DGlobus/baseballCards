@@ -22,7 +22,7 @@ public class UpdateEmployeeDto {
     @ApiModelProperty(name = "Фамилия")
     private String lastName;
     @ApiModelProperty(name = "Описание")
-    private String name;
+    private String description;
     @NotNull
     @ApiModelProperty(name = "Список характеристик")
     private List<String> characteristics;

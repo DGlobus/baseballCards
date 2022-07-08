@@ -8,17 +8,20 @@ import lombok.Builder;
 import lombok.Data;
 
 import java.util.List;
+import java.util.UUID;
 
 @Data
 @Builder
 @ApiModel(description = "Сотрудник")
 public class EmployeeDto {
+    @ApiModelProperty(name = "Идентификатор сотрудника")
+    private UUID id;
     @ApiModelProperty(name = "Имя")
     private String firstName;
     @ApiModelProperty(name = "Фамилия")
     private String lastName;
     @ApiModelProperty(name = "Описание")
-    private String name;
+    private String description;
     @ApiModelProperty(name = "Список характеристик")
     private List<String> characteristics;
     @ApiModelProperty(name = "Должность")
