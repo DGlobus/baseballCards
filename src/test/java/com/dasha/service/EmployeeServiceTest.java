@@ -10,6 +10,7 @@ import com.dasha.service.employee.EmployeeService;
 import com.dasha.service.employee.params.CreateEmployeeParams;
 import com.dasha.service.employee.params.SearchEmployeeParams;
 import com.dasha.service.employee.params.UpdateEmployeeParams;
+import com.dasha.service.employee.params.UpdateEmployeeParamsForService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -141,7 +142,7 @@ public class EmployeeServiceTest {
         UUID id = createEmployeeInService(params.get(0));
         Employee expected = employees.get(0);
 
-        UpdateEmployeeParams params = UpdateEmployeeParams.builder()
+        UpdateEmployeeParamsForService params = UpdateEmployeeParamsForService.builder()
                 .id(id)
                 .firstName("Denis")
                 .lastName("Denisov")

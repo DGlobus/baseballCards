@@ -4,8 +4,10 @@ import com.dasha.exceptions.exception.ItemNotFoundException;
 import com.dasha.model.Post;
 import com.dasha.service.post.CreatePostParams;
 import com.dasha.service.post.PostService;
+import com.dasha.service.post.UpdatePostParams;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.springframework.test.util.ReflectionTestUtils;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
@@ -30,13 +32,7 @@ public class PostServiceTest {
                 new Post(UUID.fromString("854ef89d-6c27-4635-926d-894d76a81707"), "middle developer")
         );
         postService = new PostService();
-        try{
-            Method method = postService.getClass().getDeclaredMethod("fill");
-            method.setAccessible(true);
-            method.invoke(postService);
-        } catch (NoSuchMethodException | IllegalAccessException | InvocationTargetException e) {
-            e.printStackTrace();
-        }
+        ReflectionTestUtils.invokeMethod(postService, "fill");
     }
 
 
@@ -92,7 +88,7 @@ public class PostServiceTest {
         //arrange
         Post expected = posts.get(0);
         expected.setName("Manager");
-        CreatePostParams params = new CreatePostParams("Manager");
+        UpdatePostParams params = new UpdatePostParams("Manager");
 
         //act
         Post actual = postService.update(expected.getId(), params);

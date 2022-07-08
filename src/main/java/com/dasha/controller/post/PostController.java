@@ -1,5 +1,6 @@
 package com.dasha.controller.post;
 
+import com.dasha.controller.post.dto.UpdatePostDto;
 import com.dasha.controller.post.mapper.PostMapper;
 import com.dasha.controller.post.dto.CreatePostDto;
 import com.dasha.controller.post.dto.PostDto;
@@ -7,8 +8,8 @@ import com.dasha.exceptions.exception.ItemNotFoundException;
 import com.dasha.model.Post;
 import com.dasha.service.post.CreatePostParams;
 import com.dasha.service.post.PostService;
+import com.dasha.service.post.UpdatePostParams;
 import io.swagger.annotations.ApiOperation;
-import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -50,8 +51,8 @@ public class PostController {
 
     @PostMapping("/{id}/update")
     @ApiOperation("Обновить данные должности")
-    public PostDto update(@PathVariable UUID id, @RequestBody CreatePostDto params) throws ItemNotFoundException {
-        Post updatedPost = postService.update(id, CreatePostParams.builder()
+    public PostDto update(@PathVariable UUID id, @RequestBody UpdatePostDto params) throws ItemNotFoundException {
+        Post updatedPost = postService.update(id, UpdatePostParams.builder()
                                                                     .name(params.getName())
                                                                     .build());
         return mapper.toDto(updatedPost);

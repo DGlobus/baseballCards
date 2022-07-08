@@ -12,10 +12,10 @@ import javax.validation.constraints.NotNull;
 @ApiModel(description = "Контакты")
 public class ContactsDto {
     @NotNull
-    @ApiModelProperty(name = "Номер телефона")
+    @ApiModelProperty(name = "Номер телефона", required = true)
     private String phone;
     @NotNull
-    @ApiModelProperty(name= "Электронная почта")
+    @ApiModelProperty(name= "Электронная почта", required = true)
     private String email;
     @ApiModelProperty(name = "Рабочая электронная почта")
     private String workEmail;

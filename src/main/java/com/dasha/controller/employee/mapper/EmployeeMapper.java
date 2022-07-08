@@ -6,13 +6,16 @@ import com.dasha.controller.employee.dto.EmployeeDto;
 import com.dasha.controller.employee.dto.UpdateEmployeeDto;
 import com.dasha.model.Contacts;
 import com.dasha.model.Employee;
+import com.dasha.model.Post;
 import com.dasha.service.employee.params.CreateEmployeeParams;
 import com.dasha.service.employee.params.UpdateEmployeeParams;
+import com.dasha.service.employee.params.UpdateEmployeeParamsForService;
 import com.dasha.util.ioutils.parse.EmployeeParsed;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 
 import java.util.List;
+import java.util.UUID;
 
 @Mapper(componentModel = "spring")
 public interface EmployeeMapper {
@@ -28,8 +31,10 @@ public interface EmployeeMapper {
 
     CreateEmployeeParams toParams(CreateEmployeeDto dto);
 
-    @Mapping(target = "post.id", source = "dto.postId")
-    UpdateEmployeeParams toParams(UpdateEmployeeDto dto);
+    UpdateEmployeeParams toParams(UpdateEmployeeDto dto, UUID id);
+
+    @Mapping(target = "id", source = "params.id")
+    UpdateEmployeeParamsForService toParams(UpdateEmployeeParams params, Post post);
 
     Contacts toContact(ContactsDto dto);
 }

@@ -6,6 +6,8 @@ import com.dasha.model.Post;
 import com.dasha.service.employee.params.CreateEmployeeParams;
 import com.dasha.service.employee.params.SearchEmployeeParams;
 import com.dasha.service.employee.params.UpdateEmployeeParams;
+import com.dasha.service.employee.params.UpdateEmployeeParamsForService;
+import com.dasha.util.Guard;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -26,9 +28,7 @@ public class EmployeeService{
     }
 
     public Employee getById(@NotNull UUID employeeId){
-        if(!employees.containsKey(employeeId)){
-            throw new ItemNotFoundException("Данного работника не существует " + employeeId);
-        }
+        Guard.checkAndThrowItemNotFoundException(employees.containsKey(employeeId), "Данного работника не существует " + employeeId);
         return employees.get(employeeId);
     }
 
@@ -38,7 +38,7 @@ public class EmployeeService{
         return isSorting ? sort(list) : list;
     }
 
-    public Employee update(UpdateEmployeeParams params){
+    public Employee update(UpdateEmployeeParamsForService params){
         Employee employee = getById(params.getId());
         updateEmployee(employee, params);
         return employee;
@@ -66,7 +66,7 @@ public class EmployeeService{
                         .build();
     }
 
-    private void updateEmployee(Employee employee, UpdateEmployeeParams params) {
+    private void updateEmployee(Employee employee, UpdateEmployeeParamsForService params) {
 
         employee.setFirstName(params.getFirstName());
         employee.setLastName(params.getLastName());

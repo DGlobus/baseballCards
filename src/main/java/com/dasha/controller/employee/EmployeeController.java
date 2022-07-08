@@ -2,7 +2,7 @@ package com.dasha.controller.employee;
 
 import com.dasha.action.AddEmployeeFromFile;
 import com.dasha.action.CreateEmployeeAction;
-import com.dasha.action.UpdateAction;
+import com.dasha.action.UpdateEmployeeAction;
 import com.dasha.controller.employee.dto.CreateEmployeeDto;
 import com.dasha.controller.employee.mapper.EmployeeMapper;
 import com.dasha.controller.employee.dto.EmployeeDto;
@@ -31,7 +31,7 @@ public class EmployeeController {
     private final EmployeeService employeeService;
     private final EmployeeMapper mapper;
     private final AddEmployeeFromFile addEmployeeFromFile;
-    private final UpdateAction updateAction;
+    private final UpdateEmployeeAction updateAction;
     private final CreateEmployeeAction createAction;
 
     @PostMapping("/create")
@@ -66,8 +66,7 @@ public class EmployeeController {
     @PostMapping("/{id}/update")
     @ApiOperation("Обновить данные пользователя")
     public EmployeeDto update(@PathVariable UUID id, @RequestBody @Valid UpdateEmployeeDto dto){
-        UpdateEmployeeParams params = mapper.toParams(dto);
-        params.setId(id);
+        UpdateEmployeeParams params = mapper.toParams(dto, id);
         return mapper.toDto(updateAction.update(params));
     }
 

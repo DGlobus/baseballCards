@@ -20,24 +20,24 @@ import java.util.UUID;
 @ApiModel(description = "Объект создания пользователя")
 public class CreateEmployeeDto {
     @NotBlank
-    @ApiModelProperty(name = "Имя")
+    @ApiModelProperty(name = "Имя", required = true)
     private String firstName;
     @NotBlank
-    @ApiModelProperty(name = "Фамилия")
+    @ApiModelProperty(name = "Фамилия", required = true)
     private String lastName;
     @ApiModelProperty(name = "Описание")
     private String description;
     @NotNull
-    @ApiModelProperty(name = "Список характеристик")
+    @ApiModelProperty(name = "Список характеристик", required = true)
     private List<String> characteristics;
     @NotNull
-    @ApiModelProperty(name = "Идентификатор должности")
+    @ApiModelProperty(name = "Идентификатор должности", required = true)
     private UUID postId;
     @NotNull
-    @ApiModelProperty(name = "Контактные данные")
+    @ApiModelProperty(name = "Контактные данные", required = true)
     private ContactsDto contacts;
     @NotNull
-    @ApiModelProperty(name = "Тип занятости")
+    @ApiModelProperty(name = "Тип занятости", required = true)
     private JobType jobType;
 }
 

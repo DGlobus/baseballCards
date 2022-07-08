@@ -2,6 +2,7 @@ package com.dasha.controller;
 
 import com.dasha.controller.post.dto.PostDto;
 import com.dasha.controller.post.dto.CreatePostDto;
+import com.dasha.controller.post.dto.UpdatePostDto;
 import com.dasha.controller.post.mapper.PostMapper;
 import com.dasha.exceptions.ErrorDetails;
 import com.dasha.model.Post;
@@ -11,6 +12,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.reactive.AutoConfigureWebTestClient;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.util.ReflectionTestUtils;
 import org.springframework.test.web.reactive.server.WebTestClient;
 
 import java.lang.reflect.Field;
@@ -122,7 +124,7 @@ public class PostControllerIT {
         PostDto expected = createPostInService(post);
         expected.setName("anotherone");
 
-        CreatePostDto updateDto = new CreatePostDto("anotherone");
+        UpdatePostDto updateDto = new UpdatePostDto("anotherone");
 
         PostDto actual = webTestClient.post()
                 .uri("/api/post/{id}/update/", expected.getId())
@@ -143,7 +145,7 @@ public class PostControllerIT {
     void updateIdIfNotExist() {
         //arrange
         UUID postId = UUID.randomUUID();
-        CreatePostDto updateDto = new CreatePostDto("lala");
+        UpdatePostDto updateDto = new UpdatePostDto("lala");
         ErrorDetails errorDetails = new ErrorDetails("Данной должности не существует " + postId);
 
         //act
@@ -182,16 +184,9 @@ public class PostControllerIT {
 
 
     private List<Post> getAllFromService() {
-        List<Post> list = new ArrayList<>();
-        try{
-            Field field = postService.getClass().getDeclaredField("posts");
-            field.setAccessible(true);
-            Map<UUID, Post> map = (Map<UUID, Post>) field.get(postService);
-            list = new ArrayList<>(map.values());
-        } catch (NoSuchFieldException | IllegalAccessException e) {
-            e.printStackTrace();
-        }
-        return list;
+            Map<UUID, Post> map = (HashMap<UUID, Post>)ReflectionTestUtils.getField(postService, "posts" );
+
+        return new ArrayList<>(map.values());
     }
 
     private List<PostDto> getAllPosts() {

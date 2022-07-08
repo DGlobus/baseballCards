@@ -16,6 +16,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.reactive.AutoConfigureWebTestClient;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.util.ReflectionTestUtils;
 import org.springframework.test.web.reactive.server.WebTestClient;
 
 import java.io.File;
@@ -173,14 +174,7 @@ public class EmployeeControllerIT {
     }
 
     private void addMapInService(Map<UUID, Employee> map) {
-
-        try{
-            Field field = employeeService.getClass().getDeclaredField("employees");
-            field.setAccessible(true);
-            field.set(employeeService, (HashMap<UUID, Employee>)map);
-        } catch (NoSuchFieldException | IllegalAccessException e) {
-            e.printStackTrace();
-        }
+            ReflectionTestUtils.setField(employeeService, "employees", map);
     }
 
     @Test

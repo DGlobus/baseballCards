@@ -2,6 +2,7 @@ package com.dasha.service.post;
 
 import com.dasha.exceptions.exception.ItemNotFoundException;
 import com.dasha.model.Post;
+import com.dasha.util.Guard;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
@@ -19,9 +20,7 @@ public class PostService {
     }
 
     public Post getById(@NotNull UUID postId) {
-        if(!posts.containsKey(postId)){
-            throw new ItemNotFoundException("Данной должности не существует " + postId);
-        }
+        Guard.checkAndThrowItemNotFoundException(posts.containsKey(postId), "Данной должности не существует " + postId);
         return posts.get(postId);
     }
 
@@ -29,7 +28,7 @@ public class PostService {
         return new ArrayList<>(posts.values());
     }
 
-    public Post update(@NotNull UUID postId, CreatePostParams params) {
+    public Post update(@NotNull UUID postId, UpdatePostParams params) {
         Post post = getById(postId);
         post.setName(params.getName());
         posts.replace(postId, post);

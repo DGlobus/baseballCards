@@ -1,7 +1,5 @@
-package com.dasha;
+package com.dasha.util.ioutils.parse;
 
-import com.dasha.util.ioutils.parse.EmployeeParsed;
-import com.dasha.util.ioutils.parse.ParseEmployeeJson;
 import org.junit.jupiter.api.Test;
 
 import java.io.File;
