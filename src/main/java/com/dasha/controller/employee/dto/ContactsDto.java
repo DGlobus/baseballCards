@@ -15,7 +15,7 @@ public class ContactsDto {
     @ApiModelProperty(name = "Номер телефона", required = true)
     private String phone;
     @NotNull
-    @ApiModelProperty(name= "Электронная почта", required = true)
+    @ApiModelProperty(name = "Электронная почта", required = true)
     private String email;
     @ApiModelProperty(name = "Рабочая электронная почта")
     private String workEmail;

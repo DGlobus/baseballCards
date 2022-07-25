@@ -12,7 +12,7 @@ public class ApiExceptionHandler {
 
     @ResponseStatus(HttpStatus.NOT_FOUND)
     @ExceptionHandler(ItemNotFoundException.class)
-    public ErrorDetails handleItemNotFoundException(ItemNotFoundException exception, WebRequest request){
+    public ErrorDetails handleItemNotFoundException(ItemNotFoundException exception, WebRequest request) {
         return new ErrorDetails(exception.getMessage());
     }
 }

@@ -5,12 +5,12 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.*;
+import java.util.List;
 
 public class ParseEmployeeJson implements ParseEmployeeFile {
 
-    private List<EmployeeParsed> employee;
     private final ObjectMapper mapper = new ObjectMapper();
+    private List<EmployeeParsed> employee;
 
     @Override
     public List<EmployeeParsed> read(File file) {
@@ -27,7 +27,7 @@ public class ParseEmployeeJson implements ParseEmployeeFile {
     }
 
 
-    private String putParam(Object obj){
+    private String putParam(Object obj) {
         return obj != null ? obj.toString() : null;
     }
 }

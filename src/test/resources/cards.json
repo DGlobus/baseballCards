@@ -1,17 +1,30 @@
 [
-{
-"firstName": "Геннадий",
-"lastName": "Кузьмин",
-"description": "Lorem ipsum",
-"characteristics": [ "honest", "introvert", "like criticism", "love of Learning", "pragmatism"],
-"postId": "854ef89d-6c27-4635-926d-894d76a81707"
-},
-
-{
-"firstName": "Дарья",
-"lastName": "Глобчастая",
-"description": "Big Harry Potter Fan",
-"characteristics": ["introvert"],
-"postId": "a3dec21f-1187-4b05-896b-96b580b453a5"
-}
+  {
+    "firstName": "Геннадий",
+    "lastName": "Кузьмин",
+    "description": "Lorem ipsum",
+    "characteristics": [
+      "honest",
+      "introvert",
+      "like criticism",
+      "love of Learning",
+      "pragmatism"
+    ],
+    "postId": "854ef89d-6c27-4635-926d-894d76a81707",
+    "email": "aaa@aa.aa",
+    "phone": "111-111",
+    "jobType": "PART_TIME"
+  },
+  {
+    "firstName": "Дарья",
+    "lastName": "Глобчастая",
+    "description": "Big Harry Potter Fan",
+    "characteristics": [
+      "introvert"
+    ],
+    "postId": "a3dec21f-1187-4b05-896b-96b580b453a5",
+    "email": "bbb@bb.bb",
+    "phone": "222-222",
+    "jobType": "TEMPORARY"
+  }
 ]

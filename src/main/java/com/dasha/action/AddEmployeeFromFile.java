@@ -1,6 +1,5 @@
 package com.dasha.action;
 
-import com.dasha.controller.employee.dto.CreateEmployeeDto;
 import com.dasha.controller.employee.dto.EmployeeDto;
 import com.dasha.controller.employee.mapper.EmployeeMapper;
 import com.dasha.model.Employee;
@@ -22,11 +21,11 @@ public class AddEmployeeFromFile {
     private final EmployeeMapper mapper;
     private final CreateEmployeeAction createAction;
 
-    public List<EmployeeDto> execute(File file){
+    public List<EmployeeDto> execute(File file) {
         List<EmployeeParsed> parsed = parse.read(file);
         List<Employee> employees = new ArrayList<>();
 
-        for(EmployeeParsed emp : parsed){
+        for (EmployeeParsed emp : parsed) {
             CreateEmployeeParams params = mapper.toParams(emp);
             employees.add(createAction.create(params));
         }

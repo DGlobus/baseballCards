@@ -6,7 +6,6 @@ import com.dasha.model.Post;
 import lombok.Builder;
 import lombok.Value;
 
-import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import java.util.List;
 import java.util.UUID;

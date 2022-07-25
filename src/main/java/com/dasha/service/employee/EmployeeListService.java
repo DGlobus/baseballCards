@@ -11,7 +11,7 @@ public class EmployeeListService {
 
     public List<Employee> filter(List<Employee> employees, SearchEmployeeParams search) {
 
-        if(search == null)
+        if (search == null)
             return employees;
 
         Predicate<Employee> isFiltered = emp -> employeeContainsName(search.getName(), emp.getFirstName());
@@ -21,15 +21,15 @@ public class EmployeeListService {
         return employees.stream().filter(isFiltered).collect(Collectors.toList());
     }
 
-    private boolean employeeContainsName(String searchParametr, String employeeParam){
-        if(searchParametr!=null){
+    private boolean employeeContainsName(String searchParametr, String employeeParam) {
+        if (searchParametr != null) {
             return employeeParam.toLowerCase(Locale.ROOT).contains(searchParametr);
         }
         return true;
     }
 
-    private boolean employeeEqualsID(UUID searchParametr, UUID employeeParam){
-        if(searchParametr!=null){
+    private boolean employeeEqualsID(UUID searchParametr, UUID employeeParam) {
+        if (searchParametr != null) {
             return employeeParam.equals(searchParametr);
         }
         return true;
@@ -40,7 +40,7 @@ public class EmployeeListService {
         List<Employee> changed = new ArrayList<>(employees);
 
         return changed.stream()
-                .sorted(employeeComparator)
-                .collect(Collectors.toList());
+                      .sorted(employeeComparator)
+                      .collect(Collectors.toList());
     }
 }
