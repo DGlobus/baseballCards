@@ -17,7 +17,7 @@ public class UpdateEmployeeAction {
     private final EmployeeService employeeService;
     private final EmployeeMapper mapper;
 
-    public Employee update(UpdateEmployeeParams params){
+    public Employee update(UpdateEmployeeParams params) {
 
         UpdateEmployeeParamsForService parametrs = mapper.toParams(params, postService.getById(params.getPostId()));
 

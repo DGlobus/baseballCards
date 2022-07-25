@@ -2,7 +2,9 @@ package com.dasha.service.employee.params;
 
 import com.dasha.model.Contacts;
 import com.dasha.model.JobType;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;

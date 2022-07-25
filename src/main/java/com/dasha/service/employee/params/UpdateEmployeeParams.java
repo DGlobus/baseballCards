@@ -2,8 +2,8 @@ package com.dasha.service.employee.params;
 
 import com.dasha.model.Contacts;
 import com.dasha.model.JobType;
-import com.dasha.model.Post;
-import lombok.*;
+import lombok.Builder;
+import lombok.Value;
 
 import javax.validation.constraints.NotNull;
 import java.util.List;
@@ -13,17 +13,17 @@ import java.util.UUID;
 @Builder
 public class UpdateEmployeeParams {
     @NotNull
-     UUID id;
+    UUID id;
     @NotNull
-     String firstName;
+    String firstName;
     @NotNull
-     String lastName;
-     String description;
+    String lastName;
+    String description;
     @NotNull
-     List<String> characteristics;
-     UUID postId;
+    List<String> characteristics;
+    UUID postId;
     @NotNull
-     Contacts contacts;
+    Contacts contacts;
     @NotNull
-     JobType jobType;
+    JobType jobType;
 }

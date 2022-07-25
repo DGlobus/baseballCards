@@ -14,7 +14,7 @@ public class CreateEmployeeAction {
     private final PostService postService;
     private final EmployeeService employeeService;
 
-    public Employee create(CreateEmployeeParams params){
+    public Employee create(CreateEmployeeParams params) {
         return employeeService.create(params, postService.getById(params.getPostId()));
     }
 }

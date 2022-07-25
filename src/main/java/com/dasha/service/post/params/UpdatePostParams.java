@@ -1,4 +1,4 @@
-package com.dasha.service.post;
+package com.dasha.service.post.params;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -9,7 +9,7 @@ import javax.validation.constraints.NotBlank;
 @Builder
 @AllArgsConstructor
 @Value
-public class CreatePostParams {
+public class UpdatePostParams {
     @NotBlank
     String name;
 }

@@ -3,7 +3,7 @@ package com.dasha.controller.post.mapper;
 import com.dasha.controller.post.dto.CreatePostDto;
 import com.dasha.controller.post.dto.PostDto;
 import com.dasha.model.Post;
-import com.dasha.service.post.CreatePostParams;
+import com.dasha.service.post.params.CreatePostParams;
 import org.mapstruct.Mapper;
 
 import java.util.List;

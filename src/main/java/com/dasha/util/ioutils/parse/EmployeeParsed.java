@@ -21,4 +21,5 @@ public class EmployeeParsed {
     private String email;
     private String phone;
     private String workEmail;
+    private String jobType;
 }
